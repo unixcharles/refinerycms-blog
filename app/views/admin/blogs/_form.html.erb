@@ -1,0 +1,71 @@
+<%= error_messages_for :blog -%>
+<% form_for [:admin, @blog] do |f| -%>
+  
+  <div class='field'>
+    <%= f.label :title -%>
+    <%= f.text_field :title, :class => 'larger' -%>
+  </div>
+    
+  <div class='field'>
+    <%= f.label :excerpt -%>
+    <%= f.text_area :excerpt, :rows => 5, :cols => 140, :class => 'wymeditor' -%>
+  </div>
+  
+  <div class='field'>
+    <%= f.label :body -%>
+    <%= f.text_area :body, :rows => 20, :cols => 140, :class => 'wymeditor' -%>
+  </div>
+  
+  <div class='field'>
+    <%= f.label :permalink -%>
+    <b>http://<%=h request.domain %>/blog/<%= f.text_field :permalink -%>/</b>
+    <p>
+      Only lowcase alphanumeric characters, underscore and dash. 
+      (Ex.: webdesign-more_css_tips)
+    </p>
+  </div>
+  
+  <div class='field'>
+    <%= f.label :draft -%>
+    <%= f.check_box :draft -%>
+  </div>
+
+  <div class='field'>
+    <%= f.label :allow_comment -%>
+    <%= f.check_box :allow_comment -%>
+  </div>
+  
+  <div class='field'>
+    <%= f.label :category_list %>
+    <%= f.text_field :category_list %>
+    <p>
+      separate with coma. 
+      (Ex.: Programming, Web Design)
+    </p>
+  </div>
+  
+  <div class='field'>
+    <%= f.label :tag_list %>
+    <%= f.text_field :tag_list %>
+    <p>
+      separate with coma. 
+      (Ex.: RefineryCMS, Rails, Models, Validation)
+    </p>
+  </div>
+
+  <div class='field'>
+    <%= f.label :author_list %>
+    <%= f.text_field :author_list %>
+    <p>
+      separate with coma. 
+      (Ex.: Bob Dylan, Jimi Hendrix, John Lennon)
+    </p>
+  </div>
+  
+  <div class='field'>
+    <%= f.label :publishing_date -%>
+    <%= f.datetime_select :publishing_date -%>
+  </div>
+  
+  <%= render :partial => "/shared/admin/form_actions", :locals => {:f => f, :continue_editing => false} %>
+<% end -%>

@@ -1,0 +1,15 @@
+<li class='clearfix record <%= cycle("on", "on-hover") %>' id="<%= dom_id(blog) -%>">
+  <span class='title'>
+    <span class='actions'>
+      <%= link_to refinery_icon_tag("application_go.png"), blog_post_url(blog.permalink),
+          :title => 'View this blog<br/><em>Opens in a new window</em>',
+          :target => "_blank" %>
+      <%= link_to refinery_icon_tag("application_edit.png"), edit_admin_blog_path(blog),
+           :title => 'Edit this blog' %>
+      <%= link_to refinery_icon_tag("delete.png"), admin_blog_path(blog),
+          :class => "cancel confirm-delete",
+          :title => 'Remove this blog post forever' %>
+    </span>
+    <%=h truncate blog.title, :length => 60 %> <span class="preview">&nbsp;</span>
+  </span>
+</li>

@@ -1,0 +1,16 @@
+<li class='clearfix record <%= cycle("on", "on-hover") %>' id="<%= dom_id(blog_setting) -%>">
+  <span class='title'>
+    <span class='actions'>
+      <%= link_to refinery_icon_tag("#{blog_setting.value ? 'cross' : 'tick'}.png"), 
+          {:action => "toggle_setting", :id => blog_setting.id},
+          {:title => "Set this bsetting to #{blog_setting.value ? 'false' : 'true'}"} unless blog_setting.value.nil? %>
+      
+      <%= link_to refinery_icon_tag("application_edit.png"), edit_admin_blog_setting_path(blog_setting),
+           :title => 'Edit this blog setting' if blog_setting.value.nil? %>
+    </span>
+    <strong><%=h blog_setting.name %></strong> 
+    is set to <strong>"<%=h blog_setting.value.nil? ? blog_setting.entry : blog_setting.value %>"</strong> 
+    <%= link_to '?', edit_admin_blog_setting_path(blog_setting), :title => blog_setting.description %>
+    <span class="preview">&nbsp;</span>
+  </span>
+</li>

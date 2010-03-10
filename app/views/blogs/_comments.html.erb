@@ -1,0 +1,11 @@
+<% unless @blog.comments.empty? %>
+	<h2>Comments</h2>
+	<div id="comments">
+	  <% @blog.comments.approved.each do |comment| %>
+			<h4><%=h comment.title %></h4>
+			<p><%=h comment.body %></p>
+			<p>comment from <%=h comment.name %>, <%= time_ago_in_words comment.created_at %> ago</p>
+			<hr/>
+	  <% end %>
+	</div>
+<% end %>

@@ -1,0 +1,22 @@
+<%= error_messages_for :blog_setting -%>
+<% form_for [:admin, @blog_setting] do |f| -%>
+  
+  <p>
+    <strong>
+      <%=h @blog_setting.description -%>
+    </strong>
+  </p>
+  <% if @blog_setting.value.nil? %>
+    <div class='field'>
+      <%= f.label :entry -%>
+      <%= f.text_field :entry -%>
+    </div>
+  <% else %>
+    <div class='field'>
+      <%= f.label :value -%>
+      <%= f.check_box :value -%>
+    </div>
+  <% end %>
+
+  <%= render :partial => "/shared/admin/form_actions", :locals => {:f => f, :continue_editing => false} %>
+<% end -%>

@@ -1,0 +1,23 @@
+<div id='actions'>
+  <ul>
+    <li>
+      <%= link_to "Manage Blog", admin_blogs_url, :class => "back_icon" %>
+    </li>
+  </ul>
+</div>
+<div id='records'>
+  <% if @blog_settings.any? %>
+    <%= will_paginate @blog_settings, :previous_label => '&laquo;', :next_label => '&raquo;' %>
+     <ul id='sortable_list'>
+      <%= render :partial => 'blog_setting', :collection => @blog_settings %>
+     </ul>
+    <%= will_paginate @blog_settings, :previous_label => '&laquo;', :next_label => '&raquo;' %>
+  <% else %>
+    <p>
+      <strong>
+        There are no blog settings yet.
+        Click "Create New Blog Setting" to add your first blog setting.
+      </strong>
+    </p>
+  <% end %>
+</div>

@@ -1,0 +1,48 @@
+<% if @categories %>
+  <% if @categories.any? %>
+  <h2>Categories</h2>
+  <ul id="tags">
+    <% @categories.each do |category| %>
+      <li>
+        <%= link_to category.name, blog_category_url(category.name) -%>
+      </li>
+    <% end %>
+  </ul>
+  <% end %>
+<% end %>
+<% if @tags %>
+  <% if @tags.any? %>
+  <h2>Tags</h2>
+  <ul id="tags">
+    <% @tags.each do |tag| %>
+      <li>
+        <%= link_to tag.name, blog_tag_url(tag.name) -%>
+      </li>
+    <% end %>
+  </ul>
+  <% end %>
+<% end %>
+<% if @authors %>
+  <% if @authors.any? %>
+  <h2>Authors</h2>
+  <ul id="tags">
+    <% @authors.each do |author| %>
+      <li>
+        <%= link_to author.name, blog_author_url(author.name) -%>
+      </li>
+    <% end %>
+  </ul>
+  <% end %>
+<% end %>
+<% if @recent_blogs %>
+  <% if @recent_blogs.any? %>
+  <h2>Recent posts</h2>
+  <ul id="blogs">
+    <% @recent_blogs.each do |blog| %>
+      <li>
+        <%= link_to blog.title, blog_post_url(blog.permalink) %>
+      </li>
+    <% end %>
+  </ul>
+  <% end %>
+<% end %>
