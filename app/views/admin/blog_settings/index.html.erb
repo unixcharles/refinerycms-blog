@@ -6,7 +6,7 @@
   </ul>
 </div>
 <div id='records'>
-  <% if @blog_settings.any? %>
+  <% if @blog_settings.present? and @blog_settings.any? %>
     <%= will_paginate @blog_settings, :previous_label => '&laquo;', :next_label => '&raquo;' %>
      <ul id='sortable_list'>
       <%= render :partial => 'blog_setting', :collection => @blog_settings %>

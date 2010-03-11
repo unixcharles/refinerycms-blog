@@ -18,13 +18,13 @@
 <div id='records'>
   <% if searching? %>
     <h2>Search Results for "<%= params[:search] %>"</h2>
-    <% if @blogs.any? %>
+    <% if @blogs.present? and @blogs.any? %>
       <%= render :partial => "blog", :collection => @blogs %>
     <% else %>
       <p>Sorry, no results found.</p>
     <% end %>
   <% else %>
-    <% if @blogs.any? %>
+    <% if @blogs.present? and @blogs.any? %>
       <% if @unread_comments_count > 0 %>
       <p>
         <strong>

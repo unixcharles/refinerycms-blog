@@ -1,20 +1,22 @@
 <li class='clearfix record <%= cycle("on", "on-hover") %>'>
   <span class='title'>
     <span class='actions'>
-      <%= link_to refinery_icon_tag("#{comment.is_approved ? 'cross' : 'tick'}.png"), 
-          {:action => "status", :id => comment.id},
-          {:title => "Mark this comment as #{comment.is_approved ? 'refused' : 'approved'}"} %>
-      <%= link_to refinery_icon_tag("#{comment.is_approved ? 'tick' : 'cross'}.png"), 
-          {:action => "status", :id => comment.id, :approved => 'false'},
-          {:title => "Mark this comment as #{comment.is_approved ? 'approved' : 'refused'}"} if comment.approved.nil? %>
-      <% if BlogSetting.manual_moderation %>
-      <%= (link_to refinery_icon_tag("arrow_up.png"), { :action => "unread", :id => comment.id}, 
-          :title => "Send back to unread comments") unless comment.approved.nil? %>
-      <% end %>
-      <%= link_to refinery_icon_tag('delete.png'), admin_comment_url(comment), 
-          :class => "cancel confirm-delete", :title => "Remove this comment forever" -%>
-      <%= link_to refinery_icon_tag('email_open.png'), 
-          {:action => 'show', :id => comment.id}, :title => "Read this comment" -%>
+      <%= link_to refinery_icon_tag("#{comment.is_approved? ? 'cross' : 'tick'}.png"),
+                  toggle_status_admin_comment_url(comment),
+                  :title => "Mark this comment as #{comment.is_approved? ? 'refused' : 'approved'}"} %>
+
+      <%= link_to refinery_icon_tag("arrow_up.png"),
+                  unread_admin_comment_url(comment),
+                  :title => "Send back to unread comments" if BlogSetting.manual_moderation %>
+
+      <%= link_to refinery_icon_tag('delete.png'),
+                  admin_comment_url(comment),
+                  :class => "cancel confirm-delete",
+                  :title => "Remove this comment forever" -%>
+
+      <%= link_to refinery_icon_tag('email_open.png'),
+                  admin_comment_url(comment),
+                  :title => "Read this comment" -%>
     </span>
     <%=h truncate comment.title, :length => 15 %> by <%=h truncate comment.name, :length => 15 %>
     <span class="preview">

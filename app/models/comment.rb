@@ -19,7 +19,7 @@ class Comment < ActiveRecord::Base
   
   attr_accessible :name, :email, :body, :title
 
-  def is_approved
+  def is_approved?
     true if approved
   end
   

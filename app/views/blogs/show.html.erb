@@ -11,9 +11,9 @@
     <%= @blog.body %>
   </div>
 <% if @authors %>
-  <% if @blog.author_list.any? %>
+  <% if @blog.author_list.present? and @blog.author_list.any? %>
     <div class="authors">
-      <p>By 
+      <p>By
         <% @blog.author_list.each do |author|%>
           <%= link_to author, blog_author_url(author) -%><%= author == @blog.author_list.last ? '.' : ', ' %>
         <% end %>
@@ -23,9 +23,9 @@
 <% end %>
   <hr/>
 <% if @categories %>
-  <% if @blog.category_list.any? %>
+  <% if @blog.category_list.present? and @blog.category_list.any? %>
   <div class="categories">
-    <p>Filled under: 
+    <p>Filled under:
       <% @blog.category_list.each do |category|%>
         <%= link_to category, blog_category_url(category) -%><%= category == @blog.category_list.last ? '.' : ', ' %>
       <% end %>
@@ -34,9 +34,9 @@
   <% end %>
 <% end %>
 <% if @tags %>
-  <% if @blog.tag_list.any? %>
+  <% if @blog.tag_list.present? and @blog.tag_list.any? %>
   <div class="categories">
-    <p>Tags: 
+    <p>Tags:
       <% @blog.tag_list.each do |tag| -%>
         <%= link_to tag, blog_tag_url(tag) -%><%= tag == @blog.tag_list.last ? '.' : ', ' -%>
       <% end -%>

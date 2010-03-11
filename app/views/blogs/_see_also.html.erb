@@ -1,14 +1,14 @@
 <%= render :partial => "see_also_blog_post", :locals => {
       :title => "Related posts"
       :blogs => @related_tags_blogs
-    } if @related_tags_blogs.any? %>
+    } if @related_tags_blogs.present? and @related_tags_blogs.any? %>
 
 <%= render :partial => "see_also_blog_post", :locals => {
       :title => "Also in this category"
       :blogs => @related_categories_blogs
-    } if @related_categories_blogs.any? %>
+    } if @related_categories_blogs.present? and @related_categories_blogs.any? %>
 
 <%= render :partial => "see_also_blog_post", :locals => {
       :title => "From the same author"
       :blogs => @related_authors_blogs
-    } if @related_authors_blogs.any? %>
+    } if @related_authors_blogs.present? and @related_authors_blogs.any? %>

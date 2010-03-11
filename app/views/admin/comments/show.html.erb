@@ -1,14 +1,16 @@
 <div id='actions'>
   <h2>Details</h2>
   <p>
-    <strong>Status:</strong> <%= @comment.is_approved ? "Unapproved" : "Refused" %><br/>
+    <strong>Status:</strong> <%= @comment.is_approved? ? "Unapproved" : "Refused" %><br/>
     <strong>Age:</strong> <%= time_ago_in_words(@comment.created_at) %>
   </p>
   <h2>Actions</h2>
   <ul>
-    <li><%= link_to "Mark this comment as #{@comment.is_approved ? 'refused' : 'approved'}",
-                    {:action => "status", :id => @comment.id},
-                    :class => @comment.is_approved ? 'failure_icon' : 'success_icon'  %>
+    <li>
+      <%= link_to "Mark this comment as #{@comment.is_approved? ? 'refused' : 'approved'}",
+                    toggle_status_admin
+                    {:action => "toggle_status", :id => @comment.id},
+                    :class => @comment.is_approved? ? 'failure_icon' : 'success_icon'  %>
     </li>
     <li>
       <%= link_to "Back to all Comments", {:action => 'index'}, :class => "back_icon" %>
@@ -23,7 +25,8 @@
         <strong>In</strong>
       </td>
       <td>
-        <%= link_to @comment.blog.title, blog_post_url(@comment.blog.permalink) %> <%= link_to refinery_icon_tag("application_go.png"), blog_post_url(@comment.blog.permalink),
+        <%= link_to @comment.blog.title, blog_post_url(@comment.blog.permalink) %>
+        <%= link_to refinery_icon_tag("application_go.png"), blog_post_url(@comment.blog.permalink),
             :title => 'View this blog<br/><em>Opens in a new window</em>',
             :target => "_blank" %>
       </td>
