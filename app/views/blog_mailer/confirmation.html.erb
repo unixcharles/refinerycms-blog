@@ -1,0 +1,28 @@
+<html>
+  <body>
+    <p>
+      You have received this email because you commented on a blog post titled: <%=h post_title %> at <%= site_domain %>.
+    </p>
+    <p>
+      Comment author: <%=h comment.name %>
+    </p>
+    <p>
+      Comment title: <%=h comment.title %>
+    </p>
+    <p>
+      Comment Body: <%=h comment.body %>
+    </p>
+    <hr/>
+    <p>Your comment is currently not displayed to public, you need to confirm it first by clicking on the following link:</p>
+    <p>
+      <a href='<%= "http://#{site_domain}/blog/authorize/#{comment.token}" %>'>
+        <%= "http://#{site_domain}/blog/authorize/#{comment.token}" %>
+      </a>
+    </p>
+    <p>
+      <em>
+        If you can't click on the link, manually copy and paste the above URL into a web browser.
+      </em>
+    </p>
+  </body>
+</html>
