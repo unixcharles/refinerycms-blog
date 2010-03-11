@@ -15,21 +15,21 @@ class BlogsController < ApplicationController
   end
 
   def tag
-    @blogs = Blog.tagged_with(params[:tag], :on => :tags).published
+    @blogs = Blog.tagged_with(params[:tag], :on => :tags).published    
     present(@page)
-    render :action => "index"
+    render_or_404(@blogs)
   end
-
+  
   def category
     @blogs = Blog.tagged_with(params[:category], :on => :categories).published
     present(@page)
-    render :action => "index"
+    render_or_404(@blogs)
   end
 
   def author
     @blogs = Blog.tagged_with(params[:author], :on => :authors).published
     present(@page)
-    render :action => "index"
+    render_or_404(@blogs)
   end
 
   def show
@@ -128,5 +128,13 @@ protected
 
   def find_page
     @page = Page.find_by_link_url("/blog")
+  end
+
+  def render_or_404(blogs)
+    if blogs.empty?
+      error_404
+    else
+      render :action => 'index'
+    end
   end
 end
