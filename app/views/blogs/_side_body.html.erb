@@ -1,4 +1,4 @@
-<% if @categories.present? and @categories.present? and @categories.present? and @categories.any? %>
+<% if @categories.present? and @categories.any? %>
   <h2>Categories</h2>
   <ul id="categories">
     <% @categories.each do |category| %>
@@ -9,7 +9,7 @@
   </ul>
 <% end %>
 
-<% if @tags.present? and @tags.present? and @tags.present? and @tags.any? %>
+<% if @tags.present? and @tags.any? %>
   <h2>Tags</h2>
   <ul id="tags">
     <% @tags.each do |tag| %>
@@ -20,7 +20,7 @@
   </ul>
 <% end %>
 
-<% if @authors.present? and @authors.present? and @authors.present? and @authors.any? %>
+<% if @authors.present? and @authors.any? %>
   <h2>Authors</h2>
   <ul id="tags">
     <% @authors.each do |author| %>
@@ -31,7 +31,7 @@
   </ul>
 <% end %>
 
-<% if @recent_blogs.present? and @recent_blogs.present? and @recent_blogs.present? and @recent_blogs.any? %>
+<% if @recent_blogs.present? and @recent_blogs.any? %>
   <h2>Recent posts</h2>
   <ul id="blogs">
     <% @recent_blogs.each do |blog| %>

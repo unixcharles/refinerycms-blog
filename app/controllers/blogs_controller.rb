@@ -110,10 +110,11 @@ protected
         @related_authors_blogs = @blog.find_related_authors.reject {|blog| !blog.published? }
       end
 
+      # in show action, the recent blog exclude the currently displayed blog 
       if BlogSetting.enable_recent_blogs
         @recent_blogs = Blog.find(:all,
                                   :limit => 5,
-                                  :conditions => ["id != ? and publishing_date < ? and draft = false", Blog.first, Time.now],
+                                  :conditions => ["id != ? and publishing_date < ? and draft = false", @blog.id, Time.now],
                                   :order => "publishing_date DESC")
       end
     end
