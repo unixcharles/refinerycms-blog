@@ -1,36 +1,14 @@
-<% if @related_tags_blogs %>
-  <% if @related_tags_blogs.any? %>
-  <h2>Related posts</h2>
-  <ul id="blogs">
-    <% @related_tags_blogs.each do |blog| %>
-      <li>
-        <%= link_to blog.title, blog_post_url(blog.permalink) if blog.is_published? %>
-      </li>
-    <% end %>
-  </ul>
-  <% end %>
-<% end %>
-<% if @related_categories_blogs %>
-  <% if @related_categories_blogs.any? %>
-  <h2>Also in this category</h2>
-  <ul id="blogs">
-    <% @related_categories_blogs.each do |blog| %>
-      <li>
-        <%= link_to blog.title, blog_post_url(blog.permalink) if blog.is_published? %>
-      </li>
-    <% end %>
-  </ul>
-  <% end %>
-<% end %>
-<% if @related_authors_blogs %>
-  <% if @related_authors_blogs.any? %>
-  <h2>From the same author</h2>
-  <ul id="blogs">
-    <% @related_authors_blogs.each do |blog| %>
-      <li>
-        <%= link_to blog.title, blog_post_url(blog.permalink) if blog.is_published? %>
-      </li>
-    <% end %>
-  </ul>
-  <% end %>
-<% end %>
+<%= render :partial => "see_also_blog_post", :locals => {
+      :title => "Related posts"
+      :blogs => @related_tags_blogs
+    } if @related_tags_blogs.any? %>
+
+<%= render :partial => "see_also_blog_post", :locals => {
+      :title => "Also in this category"
+      :blogs => @related_categories_blogs
+    } if @related_categories_blogs.any? %>
+
+<%= render :partial => "see_also_blog_post", :locals => {
+      :title => "From the same author"
+      :blogs => @related_authors_blogs
+    } if @related_authors_blogs.any? %>

@@ -1,0 +1,8 @@
+<h2><%= title %></h2>
+<ul class="blog_posts">
+  <% blogs.each do |blog| %>
+    <li>
+      <%= link_to blog.title, blog_post_url(blog.permalink) %>
+    </li>
+  <% end %>
+</ul>
