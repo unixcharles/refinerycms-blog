@@ -1,51 +1,49 @@
 class BlogsController < ApplicationController
 
-  before_filter :find_blog, :only => ['comment', 'show', 'authorize']
-  before_filter :find_page, :except => ['captcha', 'authorize']
-  before_filter :load_blogs, :except => ['captcha', 'authorize', 'tag', 'category', 'author', 'show']
-  before_filter :load_tags, :except => ['captcha', 'authorize']
+  before_filter :find_blog, :only => [:comment, :show, :authorize]
+  before_filter :find_page, :except => [:captcha, :authorize]
+  before_filter :load_blogs, :except => [:captcha, :authorize, :tag, :category, :author, :show]
+  before_filter :load_tags, :except => [:captcha, :authorize]
 
   def index
     present(@page)
-    
+
     respond_to do |format|
-        format.html
-        format.rss
+      format.html
+      format.rss
     end
   end
-  
+
   def tag
     @blogs = Blog.tagged_with(params[:tag], :on => :tags).published
     present(@page)
-    render 'index'
+    render :action => "index"
   end
 
   def category
     @blogs = Blog.tagged_with(params[:category], :on => :categories).published
     present(@page)
-    render 'index'
+    render :action => "index"
   end
 
   def author
     @blogs = Blog.tagged_with(params[:author], :on => :authors).published
     present(@page)
-    render 'index'
+    render :action => "index"
   end
 
-
-
   def show
-    if @blog
+    if @blog.present? and @blog.published?
       @comment = @blog.comments.new
       present(@page)
     else
       error_404
     end
   end
-  
+
   def comment
     @comment = @blog.comments.new(params[:comment])
-    
+
     if Raptcha.valid?(params) || BlogSetting.enable_captcha == false
       @comment.approved = true unless BlogSetting.manual_moderation
       if @comment.save
@@ -70,20 +68,20 @@ class BlogsController < ApplicationController
     else
       @message = @page[:invalid_comment]
     end
-    
+
     present(@page)
     render 'show'
   end
-  
+
   def captcha
     Raptcha.render(controller=self, params)
   end
-  
+
   def authorize
     if params[:token] && BlogSetting.enable_approve_comment_by_email && BlogSetting.manual_moderation
       @comment = Comment.find_by_token(params[:token])
       @comment.approved = true
-      redirect_to blog_post_url(@comment.blog.permalink) if @comment.save 
+      redirect_to blog_post_url(@comment.blog.permalink) if @comment.save
     else
       redirect_to blog_url
     end
@@ -92,18 +90,35 @@ class BlogsController < ApplicationController
 protected
   def load_blogs
     @blogs = Blog.published
-    @recent_blogs = Blog.published(:limit => 5) if BlogSetting.enable_recent_blogs
-  end
-  
-  def find_blog
-    if @blog = Blog.find_by_permalink(params[:permalink], :conditions => ["publishing_date < ? and draft = false", Time.now])
-      @related_tags_blogs = @blog.find_related_tags if BlogSetting.enable_related_tags
-      @related_categories_blogs = @blog.find_related_categories if BlogSetting.enable_related_categories
-      @related_authors_blogs = @blog.find_related_authors if BlogSetting.enable_related_authors
-      @recent_blogs = Blog.find(:all, :limit => 5, :conditions => ["id != ? and publishing_date < ? and draft = false", Blog.first, Time.now]) if BlogSetting.enable_recent_blogs
+
+    if BlogSetting.enable_recent_blogs
+      @recent_blogs = Blog.published(:limit => 5)
     end
   end
-  
+
+  def find_blog
+    if (@blog = Blog.find_by_permalink(params[:permalink], :conditions => ["publishing_date < ? and draft = false", Time.now]))
+      if BlogSetting.enable_related_tags
+        @related_tags_blogs = @blog.find_related_tags.reject {|blog| !blog.published? }
+      end
+
+      if BlogSetting.enable_related_categories
+        @related_categories_blogs = @blog.find_related_categories.reject {|blog| !blog.published? }
+      end
+
+      if BlogSetting.enable_related_authors
+        @related_authors_blogs = @blog.find_related_authors.reject {|blog| !blog.published? }
+      end
+
+      if BlogSetting.enable_recent_blogs
+        @recent_blogs = Blog.find(:all,
+                                  :limit => 5,
+                                  :conditions => ["id != ? and publishing_date < ? and draft = false", Blog.first, Time.now],
+                                  :order => "publishing_date DESC")
+      end
+    end
+  end
+
   def load_tags
     @tags = Blog.published.tag_counts if BlogSetting.enable_tags
     @categories = Blog.published.category_counts if BlogSetting.enable_categories
@@ -112,5 +127,5 @@ protected
 
   def find_page
     @page = Page.find_by_link_url("/blog")
-  end  
+  end
 end
