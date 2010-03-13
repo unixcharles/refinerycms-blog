@@ -3,7 +3,7 @@ class Blog < ActiveRecord::Base
   has_many :comments
 
   named_scope :published, lambda {{:conditions => ["publishing_date < '#{Time.now.to_formatted_s(:db)}' and draft != ?", true],
-                                  :order => "publishing_date ASC"}}
+                                  :order => "publishing_date DESC"}}
 
 
   acts_as_indexed :fields => [:title, :permalink, :excerpt, :body],
