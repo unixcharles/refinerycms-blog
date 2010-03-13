@@ -97,7 +97,7 @@ protected
   end
 
   def find_blog
-    if (@blog = Blog.find_by_permalink(params[:permalink], :conditions => ["publishing_date < ? and draft = false", Time.now]))
+    if (@blog = Blog.find_by_permalink(params[:permalink], :conditions => ["publishing_date < ? and draft != ?", Time.now, true]))
       if BlogSetting.enable_related_tags
         @related_tags_blogs = @blog.find_related_tags.reject {|blog| !blog.published? }
       end
@@ -114,7 +114,7 @@ protected
       if BlogSetting.enable_recent_blogs
         @recent_blogs = Blog.find(:all,
                                   :limit => 5,
-                                  :conditions => ["id != ? and publishing_date < ? and draft = false", @blog.id, Time.now],
+                                  :conditions => ["id != ? and publishing_date < ? and draft != ?", @blog.id, Time.now, true],
                                   :order => "publishing_date DESC")
       end
     end

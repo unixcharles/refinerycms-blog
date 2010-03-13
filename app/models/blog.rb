@@ -2,7 +2,7 @@ class Blog < ActiveRecord::Base
   acts_as_taggable_on :categories, :tags, :authors
   has_many :comments
 
-  named_scope :published, lambda {{:conditions => "publishing_date < '#{Time.now.to_formatted_s(:db)}' and draft IS NOT true",
+  named_scope :published, lambda {{:conditions => ["publishing_date < '#{Time.now.to_formatted_s(:db)}' and draft != ?", true],
                                   :order => "publishing_date ASC"}}
 
 
