@@ -99,15 +99,15 @@ protected
   def find_blog
     if (@blog = Blog.find_by_permalink(params[:permalink], :conditions => ["publishing_date < ? and draft != ?", Time.now, true]))
       if BlogSetting.enable_related_tags
-        @related_tags_blogs = @blog.find_related_tags.reject {|blog| !blog.published? }
+        @related_tags_blogs = @blog.find_related_tags.reject {|blog| !blog.published? && !@blog }
       end
 
       if BlogSetting.enable_related_categories
-        @related_categories_blogs = @blog.find_related_categories.reject {|blog| !blog.published? }
+        @related_categories_blogs = @blog.find_related_categories.reject {|blog| !blog.published? && !@blog }
       end
 
       if BlogSetting.enable_related_authors
-        @related_authors_blogs = @blog.find_related_authors.reject {|blog| !blog.published? }
+        @related_authors_blogs = @blog.find_related_authors.reject {|blog| !blog.published? && !@blog }
       end
 
       # in show action, the recent blog exclude the currently displayed blog 
