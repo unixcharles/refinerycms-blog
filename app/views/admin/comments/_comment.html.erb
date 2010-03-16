@@ -3,7 +3,7 @@
     <span class='actions'>
       <%= link_to refinery_icon_tag("#{comment.is_approved? ? 'cross' : 'tick'}.png"),
                   toggle_status_admin_comment_url(comment),
-                  :title => "Mark this comment as #{comment.is_approved? ? 'refused' : 'approved'}"} %>
+                  :title => "Mark this comment as #{comment.is_approved? ? 'refused' : 'approved'}" %>
 
       <%= link_to refinery_icon_tag("arrow_up.png"),
                   unread_admin_comment_url(comment),
