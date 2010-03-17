@@ -12,11 +12,11 @@ class BlogMailer < ActionMailer::Base
     site_domain = request.domain(RefinerySetting.find_or_set(:tld_length, 1))
     subject       "#{RefinerySetting[:site_name]} - comment confirmation"
     recipients    comment.email
-    from          "\"#{RefinerySetting[:site_name]}\" <no-reply@#{site_domain}>"
+    from          "\"#{RefinerySetting[:site_name]}\" <no-reply@#{request.domain(RefinerySetting.find_or_set(:tld_length, 1))}>"
     sent_on       Time.now
     content_type  "text/html"
     body          :comment => comment,
-                  :site_domain => site_domain
+                  :site_domain => request.domain(RefinerySetting.find_or_set(:tld_length, 1))
   end
 
 end

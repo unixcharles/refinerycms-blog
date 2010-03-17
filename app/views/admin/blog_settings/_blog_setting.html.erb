@@ -3,7 +3,7 @@
     <span class='actions'>
       <%= link_to refinery_icon_tag("#{blog_setting.value ? 'cross' : 'tick'}.png"), 
           {:action => "toggle_setting", :id => blog_setting.id},
-          {:title => "Set this bsetting to #{blog_setting.value ? 'false' : 'true'}"} unless blog_setting.value.nil? %>
+          {:title => "Set this setting to #{blog_setting.value ? 'false' : 'true'}"} unless blog_setting.value.nil? %>
       
       <%= link_to refinery_icon_tag("application_edit.png"), edit_admin_blog_setting_path(blog_setting),
            :title => 'Edit this blog setting' if blog_setting.value.nil? %>

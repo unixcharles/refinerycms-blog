@@ -12,12 +12,5 @@
       <%= render :partial => 'blog_setting', :collection => @blog_settings %>
      </ul>
     <%= will_paginate @blog_settings, :previous_label => '&laquo;', :next_label => '&raquo;' %>
-  <% else %>
-    <p>
-      <strong>
-        There are no blog settings yet.
-        Click "Create New Blog Setting" to add your first blog setting.
-      </strong>
-    </p>
   <% end %>
 </div>

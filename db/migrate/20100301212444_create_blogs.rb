@@ -46,7 +46,7 @@ class CreateBlogs < ActiveRecord::Migration
     end
 
     manual_moderation = BlogSetting.create(:name => "Manual Moderation", :value => false, :description => "Set this setting to true to review manually approve comments before they appear on the blog post or confirmed by the poster with email confirmation when Approve by comment is enabled. This setting need to be enabled if you use email confirmation.")
-    enable_approve_comment_by_email = BlogSetting.create(:name => "Enable Approve Comment by email", :value => true, :description => "Set this setting to true to enable comment confirmation by email, commenter will recieve an email with a confirmation link.")
+    enable_approve_comment_by_email = BlogSetting.create(:name => "Enable Approve Comment by email", :value => false, :description => "Set this setting to true to enable comment confirmation by email, commenter will recieve an email with a confirmation link.")
     enable_captcha = BlogSetting.create(:name => "Enable Captcha", :value => false, :description => "Set this setting to true to protect your commect with Captcha question.")
 
     enable_categories = BlogSetting.create(:name => "Enable Categories", :value => true, :description => "Set this setting to true to enable 'Category' tags.")
