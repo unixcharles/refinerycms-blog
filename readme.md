@@ -68,7 +68,7 @@ __Still not done, sorry__
 
 RSS feed
 --------
-There is an RSS feed at /blog.rss, you may want to specify it in your layout to enable auto discovery.
+There is an RSS feed at /blog.rss, auto discovery link to /blog.rss are include in index and view.
 
 Credit
 ------
