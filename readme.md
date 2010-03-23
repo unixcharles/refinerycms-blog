@@ -54,7 +54,16 @@ _The lib is located at /lib/raptcha.rb, you can update it or edit to fit your ne
 
 Installation (as a plugin)
 --------------------------
-script/plugin install git@github.com:unixcharles/refinerycms-blog.git
+
+First, make sure you've run the migration on RefineryCMS (db:setup / db:migrate).
+
+Deal with the dependencies (see dependencies)
+
+Clone the plugin:
+
+> script/plugin install git://github.com/unixcharles/refinerycms-blog.git
+
+Copy the migration with
 
 > rake refinery:blog:install
 
