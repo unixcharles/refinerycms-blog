@@ -36,9 +36,11 @@ You need to install http://github.com/mbleigh/acts-as-taggable-on
 
 add the line:
 
-> config.gem "acts-as-taggable-on", :source => "http://gemcutter.org"
+> gem "acts-as-taggable-on"
 
-to your environment.rb (now application.rb)
+to your Gemfile
+
+> bundle install
 
 If you are already using acts-as-taggable-on in your app, you may want to remove the migration file for "tags/taggings" tables.
 
@@ -49,6 +51,14 @@ The Captcha use Raptcha, a really cool "one file lib" that just work from ahowar
 If you want to use Captcha, you need rMagick (which is already a dependency of RefineryCMS) and fattr:
 
 > gem install fattr
+
+add the line:
+
+> gem "fattr"
+
+to your Gemfile
+
+> bundle install
 
 _The lib is located at /lib/raptcha.rb, you can update it or edit to fit your need._
 
@@ -70,14 +80,6 @@ Copy the migration with
 & run the migration
 
 > rake db:migrate
-
-Installation (as a gem)
------------------------
-__Still not done, sorry__
-
-RSS feed
---------
-There is an RSS feed at /blog.rss, auto discovery link to /blog.rss are include in index and view.
 
 Credit
 ------
