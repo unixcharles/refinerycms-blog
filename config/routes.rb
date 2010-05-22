@@ -12,7 +12,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.raptcha '/raptcha', :controller => 'blogs', :action => 'captcha'
 
-  map.namespace(:admin) do |admin|
+  map.namespace(:admin, :path_prefix => 'refinery') do |admin|
     admin.resources :blogs, :as => 'blog'
     admin.resources :comments, :member => {:toggle_status => :get, :unread => :get}
     admin.resources :blog_settings
