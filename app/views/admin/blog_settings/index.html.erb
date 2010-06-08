@@ -1,10 +1,4 @@
-<div id='actions'>
-  <ul>
-    <li>
-      <%= link_to "Manage Blog", admin_blogs_url, :class => "back_icon" %>
-    </li>
-  </ul>
-</div>
+<%= render :partial => '/admin/blogs/side_bar' %>
 <div id='records'>
   <% if @blog_settings.present? and @blog_settings.any? %>
     <%= will_paginate @blog_settings, :previous_label => '&laquo;', :next_label => '&raquo;' %>

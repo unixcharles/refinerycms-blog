@@ -1,13 +1,4 @@
-<div id='actions'>
-  <ul>
-    <li>
-      <%= render :partial => "/shared/admin/search", :locals => {:url => admin_comments_url} %>
-    </li>
-    <li>
-      <%= link_to "Manage Blog", admin_blogs_url, :class => "back_icon" %>
-    </li>
-  </ul>
-</div>
+<%= render :partial => '/admin/blogs/side_bar' %>
 <div id='records'>
   <% if searching? %>
     <h2>Search Results for "<%= params[:search] %>"</h2>
