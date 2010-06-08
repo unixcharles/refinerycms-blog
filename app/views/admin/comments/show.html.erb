@@ -8,9 +8,8 @@
   <ul>
     <li>
       <%= link_to "Mark this comment as #{@comment.is_approved? ? 'refused' : 'approved'}",
-                    toggle_status_admin
                     {:action => "toggle_status", :id => @comment.id},
-                    :class => @comment.is_approved? ? 'failure_icon' : 'success_icon'  %>
+                    :class => (@comment.is_approved? ? 'failure_icon' : 'success_icon')  %>
     </li>
     <li>
       <%= link_to "Back to all Comments", {:action => 'index'}, :class => "back_icon" %>
