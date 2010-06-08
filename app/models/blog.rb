@@ -24,4 +24,9 @@ class Blog < ActiveRecord::Base
   def num_comments
     comments.size
   end
+  
+  def self.grouped_by_date
+    all.group_by { |blog| blog.publishing_date.to_date }.sort {|a,b| b[0] <=> a[0]}
+  end
+  
 end

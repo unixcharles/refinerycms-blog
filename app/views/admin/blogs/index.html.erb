@@ -8,12 +8,13 @@
       <p>Sorry, no results found.</p>
     <% end %>
   <% else %>
-    <% if @blogs.any? %>
-      <%= will_paginate @blogs, :previous_label => '&laquo;', :next_label => '&raquo;' %>
-       <ul>
-        <%= render :partial => 'blog', :collection => @blogs %>
-       </ul>
-      <%= will_paginate @blogs, :previous_label => '&laquo;', :next_label => '&raquo;' %>
+    <% if @grouped_blogs.any? %>
+      <% @grouped_blogs.each do |date, posts| %>
+        <h3><%= date.strftime("%A, %d %B %Y") %></h3>
+        <ul>
+          <%= render :partial => 'blog', :collection => posts %>
+        </ul>
+      <% end %> 
     <% else %>
       <p>
         <strong>
