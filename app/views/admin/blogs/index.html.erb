@@ -4,15 +4,14 @@
       <%= render :partial => "/shared/admin/search", :locals => {:url => admin_blogs_url} %>
     </li>
     <li>
-      <%= link_to "Create New Blog", new_admin_blog_url, :class => "add_icon" %>
+      <%= link_to "Create New Post", new_admin_blog_url, :class => "add_icon" %>
     </li>
     <li>
-      <%= link_to "Manage comments", admin_comments_url, :class => "user_comment_icon" %>
+      <%= link_to "Manage Comments", admin_comments_url, :class => "user_comment_icon" %>
     </li>
     <li>
-      <%= link_to "Edit blog settings", admin_blog_settings_url, :class => "edit_icon" %>
+      <%= link_to "Edit Blog Settings", admin_blog_settings_url, :class => "edit_icon" %>
     </li>
-    
   </ul>
 </div>
 <div id='records'>
@@ -40,8 +39,8 @@
     <% else %>
       <p>
         <strong>
-          There are no blogs yet.
-          Click "Create New Blog" to add your first blog.
+          There are no posts yet.
+          Click "Create New Post" to add your first post to your blog.
         </strong>
       </p>
     <% end %>
