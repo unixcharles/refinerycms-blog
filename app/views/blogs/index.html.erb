@@ -3,20 +3,9 @@
 <% end %>
 
 <% content_for :body_content_left do %>
-  <% @blogs.each do |blog| %>
-    <div class="blog">
-      <h2><%= blog.title %></h2>
-      <p>
-        <small><%= blog.publishing_date.to_date.to_s(:long) %></small>
-      </p>
-      <p>
-        <%= blog.excerpt %>
-      </p>
-      <p>
-        <%= link_to 'Read more', blog_post_url(blog.permalink) -%>
-      </p>
-    </div>
-  <% end %>
+  <div class="blog_posts">
+    <%= render :partial => 'blog_post', :collection => @blogs %>
+  </div>
 <% end %>
 
 <% content_for :body_content_right do %>

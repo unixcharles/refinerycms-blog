@@ -1,0 +1,11 @@
+<h2><%= link_to blog_post.title, blog_post_url(blog_post.permalink) %></h2>
+<p class="post_date">
+  <%= blog_post.publishing_date.to_date.to_s(:long) %>
+  <%= " by #{blog_post.author_list.to_sentence}" unless blog_post.authors.blank? %>
+</p>
+<p>
+  <%= blog_post.excerpt %>
+</p>
+<p>
+  <%= link_to 'Read more', blog_post_url(blog_post.permalink) -%> (<%= pluralize blog_post.num_comments, 'comment' %>)
+</p>
