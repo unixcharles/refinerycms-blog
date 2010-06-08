@@ -20,4 +20,8 @@ class Blog < ActiveRecord::Base
     # the publishing date is before now and it is not a draft blog post.
     publishing_date <= Time.now && !draft
   end
+  
+  def num_comments
+    comments.size
+  end
 end
