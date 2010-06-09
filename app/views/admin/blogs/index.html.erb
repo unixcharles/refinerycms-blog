@@ -7,21 +7,19 @@
     <% else %>
       <p>Sorry, no results found.</p>
     <% end %>
+  <% elsif @grouped_blogs.any? %>
+    <% @grouped_blogs.each do |date, posts| %>
+      <h3><%= date.strftime("%A, #{date.day} %B %Y") %></h3>
+      <ul>
+        <%= render :partial => 'blog', :collection => posts %>
+      </ul>
+    <% end %> 
   <% else %>
-    <% if @grouped_blogs.any? %>
-      <% @grouped_blogs.each do |date, posts| %>
-        <h3><%= date.strftime("%A, #{date.day} %B %Y") %></h3>
-        <ul>
-          <%= render :partial => 'blog', :collection => posts %>
-        </ul>
-      <% end %> 
-    <% else %>
-      <p>
-        <strong>
-          There are no posts yet.
-          Click "Create New Post" to add your first post to your blog.
-        </strong>
-      </p>
-    <% end %>
+    <p>
+      <strong>
+        There are no posts yet.
+        Click "Create New Post" to add your first post to your blog.
+      </strong>
+    </p>
   <% end %>
 </div>
