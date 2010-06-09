@@ -4,13 +4,13 @@
       <%= render :partial => "/shared/admin/search", :locals => {:url => admin_blogs_url} %>
     </li>
     <li>
-      <%= link_to "Create New Post", new_admin_blog_url, :class => "add_icon" %>
+      <%= link_to "Create new post", new_admin_blog_url, :class => "add_icon" %>
     </li>
     <li>
-      <%= link_to "Moderate Comments (#{Comment.unread.count})", admin_comments_url, :class => "user_comment_icon" %>
+      <%= link_to "Moderate comments (#{Comment.unread.count} unread)", admin_comments_url, :class => "user_comment_icon" %>
     </li>
     <li>
-      <%= link_to "Edit Blog Settings", admin_blog_settings_url, :class => "edit_icon" %>
+      <%= link_to "Edit settings", admin_blog_settings_url, :class => "edit_icon" %>
     </li>
   </ul>
 </div>
