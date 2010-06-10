@@ -1,4 +1,4 @@
-<% content_for :head_after_javascript_libraries do %>
+<% content_for :head do %>
   <%= auto_discovery_link_tag(:rss, blog_url(:format => 'rss'), {:title => "#{RefinerySetting.find_or_set(:site_name, "Company Name")} Blog"}) %>
 <% end %>
 
