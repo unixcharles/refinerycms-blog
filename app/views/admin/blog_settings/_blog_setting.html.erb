@@ -9,7 +9,7 @@
            :title => 'Edit this blog setting' if blog_setting.value.nil? %>
     </span>
     <strong><%=h blog_setting.name %></strong> 
-    is set to <strong>"<%=h blog_setting.value.nil? ? blog_setting.entry : blog_setting.value %>"</strong> 
+    <%= "is set to <strong>#{h blog_setting.entry}</strong>" if blog_setting.entry %>
     <%= link_to '?', edit_admin_blog_setting_path(blog_setting), :title => blog_setting.description %>
     <span class="preview">&nbsp;</span>
   </span>

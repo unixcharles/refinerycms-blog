@@ -7,58 +7,46 @@
 <% end %>
 
 <% content_for :body_content_left do %>
-<div id='body_content_left' class='clearfix'>
-  <%= @message if @message %>
-  <%= error_messages_for :comment, :header_message => "Whoops there was a small problem",
-                                    :message => "The following problems need to be corrected:" %>
   <div class="body">
     <%= @blog.body %>
   </div>
-<% if @authors %>
-  <% if @blog.author_list.present? and @blog.author_list.any? %>
+  
+  <% if @authors and @blog.author_list.present? and @blog.author_list.any? %>
     <div class="authors">
       <p>By
-        <% @blog.author_list.each do |author|%>
-          <%= link_to author, blog_author_url(author) -%><%= author == @blog.author_list.last ? '.' : ', ' %>
-        <% end %>
+        <%= @blog.author_list.collect{ |author| link_to author, blog_author_url(author) }.join(', ') %>
       </p>
     </div>
   <% end %>
-<% end %>
-  <hr/>
-<% if @categories %>
-  <% if @blog.category_list.present? and @blog.category_list.any? %>
+  
+  <% if @categories and @blog.category_list.present? and @blog.category_list.any? %>
   <div class="categories">
-    <p>Filled under:
-      <% @blog.category_list.each do |category|%>
-        <%= link_to category, blog_category_url(category) -%><%= category == @blog.category_list.last ? '.' : ', ' %>
-      <% end %>
+    <p>Filed under:
+      <%= @blog.category_list.collect{ |category| link_to category, blog_category_url(category) }.join(', ') %>
     </p>
   </div>
   <% end %>
-<% end %>
-<% if @tags %>
-  <% if @blog.tag_list.present? and @blog.tag_list.any? %>
+  
+  <% if @tags and @blog.tag_list.present? and @blog.tag_list.any? %>
   <div class="categories">
     <p>Tags:
-      <% @blog.tag_list.each do |tag| -%>
-        <%= link_to tag, blog_tag_url(tag) -%><%= tag == @blog.tag_list.last ? '.' : ', ' -%>
-      <% end -%>
+      <%= @blog.tag_list.collect{ |tag| link_to tag, blog_tag_url(tag) }.join(', ') %>
     </p>
   </div>
   <% end %>
-<% end %>
 
   <%= render :partial => 'comments' %>
+  
+  <%= @message if @message %>
+  <%= error_messages_for :comment, :header_message => "Whoops there was a small problem",
+                                    :message => "The following problems need to be corrected:" %>
+                                    
   <%= render :partial => 'form' %>
-</div>
 <% end %>
 
 <% content_for :body_content_right do %>
-<div>
   <h2>Publishing Date</h2>
-  Posted on <%= @blog.publishing_date %>
-</div>
+  <p>Posted on <%= @blog.publishing_date.to_s(:long_ordinal) %></p>
 
   <%= render :partial => 'see_also' %>
   <%= render :partial => 'side_body' %>

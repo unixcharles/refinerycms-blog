@@ -3,7 +3,7 @@
   
   <div class='field'>
     <%= f.label :title -%>
-    <%= f.text_field :title, :class => 'larger' -%>
+    <%= f.text_field :title, :class => 'larger', :style => 'width: 944px' -%>
   </div>
     
   <div class='field'>
@@ -16,56 +16,80 @@
     <%= f.text_area :body, :rows => 20, :cols => 140, :class => 'wymeditor' -%>
   </div>
   
-  <div class='field'>
-    <%= f.label :permalink -%>
-    <b>http://<%=h request.domain %>/blog/<%= f.text_field :permalink -%>/</b>
-    <p>
-      Only lowcase alphanumeric characters, underscore and dash. 
-      (Ex.: webdesign-more_css_tips)
-    </p>
+  <p>
+    <%= link_to "&raquo; Hide/Show Advanced Options", "#",
+                :id => 'toggle_advanced_options',
+                :rel => 'Click to access meta tag settings and menu options' %>
+  </p>
+  
+  <div id='more_options' style="display:none;">
+    <div class='field'>
+      <%= f.label :publishing_date, "Date published" -%>
+      <%= f.datetime_select :publishing_date -%>
+    </div>
+    
+    <div class='field'>
+      <label>Allow comments</label>
+      <%= f.check_box :allow_comment -%>
+      <%= f.label :allow_comment, "Allow readers to comment on this post", :class => "stripped" %>
+    </div>
+
+    <div class='field'>
+      <%= f.label :permalink -%>
+      <b>http://<%=h request.domain %>/blog/<%= f.text_field :permalink -%>/</b><br/>
+      <small>
+        Allowed characters are: lowercase letters, numbers, underscores and dashes.
+      </small>
+    </div>
+  
+    <div class='field'>
+      <%= f.label :category_list, "Categories" %>
+      <%= f.text_field :category_list %><br/>
+      <small>
+        Separate with commas, e.g. "Programming, Web Design"
+      </small>
+    </div>
+  
+    <div class='field'>
+      <%= f.label :tag_list, "Tags" %>
+      <%= f.text_field :tag_list %><br/>
+      <small>
+        Separate with commas, e.g. "RefineryCMS, Rails, Models, Validation"
+      </small>
+    </div>
+
+    <div class='field'>
+      <%= f.label :author_list, "Authors" %>
+      <%= f.text_field :author_list %><br/>
+      <small>
+        Separate with commas, e.g. "Bob Dylan, Jimi Hendrix, John Lennon"
+      </small>
+    </div>
   </div>
   
   <div class='field'>
-    <%= f.label :draft -%>
+    <label>Draft</label>
     <%= f.check_box :draft -%>
-  </div>
-
-  <div class='field'>
-    <%= f.label :allow_comment -%>
-    <%= f.check_box :allow_comment -%>
-  </div>
-  
-  <div class='field'>
-    <%= f.label :category_list %>
-    <%= f.text_field :category_list %>
-    <p>
-      separate with coma. 
-      (Ex.: Programming, Web Design)
-    </p>
-  </div>
-  
-  <div class='field'>
-    <%= f.label :tag_list %>
-    <%= f.text_field :tag_list %>
-    <p>
-      separate with coma. 
-      (Ex.: RefineryCMS, Rails, Models, Validation)
-    </p>
-  </div>
-
-  <div class='field'>
-    <%= f.label :author_list %>
-    <%= f.text_field :author_list %>
-    <p>
-      separate with coma. 
-      (Ex.: Bob Dylan, Jimi Hendrix, John Lennon)
-    </p>
-  </div>
-  
-  <div class='field'>
-    <%= f.label :publishing_date -%>
-    <%= f.datetime_select :publishing_date -%>
+    <%= f.label :draft, "Save as Draft", :class => "stripped" %>
   </div>
   
   <%= render :partial => "/shared/admin/form_actions", :locals => {:f => f, :continue_editing => false} %>
 <% end -%>
+
+<% content_for :head do %>
+  <script type='text/javascript'>
+    $(document).ready(function(){
+      $('#toggle_advanced_options').click(function(e){
+        e.preventDefault();
+        $('#more_options').animate({
+          opacity: 'toggle'
+          , height: 'toggle'
+        }, 250);
+
+        $('html,body').animate({
+          scrollTop: $('#toggle_advanced_options').parent().offset().top
+        }, 250);
+      });
+    });
+  </script>
+<% end %>
