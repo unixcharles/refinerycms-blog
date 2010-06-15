@@ -4,7 +4,7 @@
 	  <% @blog.comments.approved.each do |comment| %>
 			<h4><%=h comment.title %></h4>
 			<p><%=h comment.body %></p>
-			<p>comment from <%=h comment.name %>, <%= time_ago_in_words comment.created_at %> ago</p>
+			<p>Comment from <%=h comment.name %>, <%= time_ago_in_words comment.created_at %> ago</p>
 	  <% end %>
 	</div>
 <% end %>

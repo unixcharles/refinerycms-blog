@@ -23,54 +23,58 @@
   </p>
   
   <div id='more_options' style="display:none;">
-    <div class='field'>
-      <%= f.label :publishing_date, "Date published" -%>
-      <%= f.datetime_select :publishing_date -%>
+    <div class="hemisquare">
+      <div class='field'>
+        <%= f.label :publishing_date, "Date published" -%>
+        <%= f.datetime_select :publishing_date -%>
+      </div>
+    
+      <div class='field'>
+        <label>Allow comments</label>
+        <%= f.check_box :allow_comment -%>
+        <%= f.label :allow_comment, "Allow readers to comment on this post", :class => "stripped" %>
+      </div>
+
+      <div class='field'>
+        <%= f.label :permalink -%>
+        <b>http://<%=h request.domain %>/blog/<%= f.text_field :permalink -%></b><br/>
+        <small>
+          Allowed characters are: lowercase letters, numbers, underscores and dashes.
+        </small>
+      </div>
+      
+      <div class='field'>
+        <label>Draft</label>
+        <%= f.check_box :draft -%>
+        <%= f.label :draft, "Save as Draft", :class => "stripped" %>
+      </div>
     </div>
     
-    <div class='field'>
-      <label>Allow comments</label>
-      <%= f.check_box :allow_comment -%>
-      <%= f.label :allow_comment, "Allow readers to comment on this post", :class => "stripped" %>
-    </div>
+    <div class="hemisquare right_side">
+      <div class='field'>
+        <%= f.label :category_list, "Categories" %>
+        <%= f.text_field :category_list %><br/>
+        <small>
+          Separate with commas, e.g. "Programming, Web Design"
+        </small>
+      </div>
+  
+      <div class='field'>
+        <%= f.label :tag_list, "Tags" %>
+        <%= f.text_field :tag_list %><br/>
+        <small>
+          Separate with commas, e.g. "RefineryCMS, Rails, Models, Validation"
+        </small>
+      </div>
 
-    <div class='field'>
-      <%= f.label :permalink -%>
-      <b>http://<%=h request.domain %>/blog/<%= f.text_field :permalink -%>/</b><br/>
-      <small>
-        Allowed characters are: lowercase letters, numbers, underscores and dashes.
-      </small>
+      <div class='field'>
+        <%= f.label :author_list, "Authors" %>
+        <%= f.text_field :author_list %><br/>
+        <small>
+          Separate with commas, e.g. "Bob Dylan, Jimi Hendrix, John Lennon"
+        </small>
+      </div>
     </div>
-  
-    <div class='field'>
-      <%= f.label :category_list, "Categories" %>
-      <%= f.text_field :category_list %><br/>
-      <small>
-        Separate with commas, e.g. "Programming, Web Design"
-      </small>
-    </div>
-  
-    <div class='field'>
-      <%= f.label :tag_list, "Tags" %>
-      <%= f.text_field :tag_list %><br/>
-      <small>
-        Separate with commas, e.g. "RefineryCMS, Rails, Models, Validation"
-      </small>
-    </div>
-
-    <div class='field'>
-      <%= f.label :author_list, "Authors" %>
-      <%= f.text_field :author_list %><br/>
-      <small>
-        Separate with commas, e.g. "Bob Dylan, Jimi Hendrix, John Lennon"
-      </small>
-    </div>
-  </div>
-  
-  <div class='field'>
-    <label>Draft</label>
-    <%= f.check_box :draft -%>
-    <%= f.label :draft, "Save as Draft", :class => "stripped" %>
   </div>
   
   <%= render :partial => "/shared/admin/form_actions", :locals => {:f => f, :continue_editing => false} %>
