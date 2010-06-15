@@ -1,0 +1,10 @@
+<% unless (authors = Blog.authors).blank? %>
+  <h2>Authors</h2>
+  <ul id="tags">
+    <% authors.each do |author| %>
+      <li>
+        <%= link_to author, blog_author_url(author) -%>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

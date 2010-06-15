@@ -11,6 +11,6 @@
           :title => 'Remove this blog post forever' %>
     </span>
     <%=h truncate blog.title, :length => 60 %> 
-    <span class="preview"><%= pluralize blog.num_comments, 'comment' %></span>
+    <span class="preview"><%= pluralize blog.approved_comment_count, 'comment' %></span>
   </span>
 </li>

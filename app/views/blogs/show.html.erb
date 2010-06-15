@@ -11,37 +11,19 @@
     <%= @blog.body %>
   </div>
   
-  <% if @authors and @blog.author_list.present? and @blog.author_list.any? %>
-    <div class="authors">
-      <p>By
-        <%= @blog.author_list.collect{ |author| link_to author, blog_author_url(author) }.join(', ') %>
-      </p>
-    </div>
-  <% end %>
-  
-  <% if @categories and @blog.category_list.present? and @blog.category_list.any? %>
-  <div class="categories">
-    <p>Filed under:
-      <%= @blog.category_list.collect{ |category| link_to category, blog_category_url(category) }.join(', ') %>
-    </p>
-  </div>
-  <% end %>
-  
-  <% if @tags and @blog.tag_list.present? and @blog.tag_list.any? %>
-  <div class="categories">
-    <p>Tags:
-      <%= @blog.tag_list.collect{ |tag| link_to tag, blog_tag_url(tag) }.join(', ') %>
-    </p>
-  </div>
-  <% end %>
+  <%= render :partial => '/blogs/post/authors' %>
+  <%= render :partial => '/blogs/post/categories' %>
+  <%= render :partial => '/blogs/post/tags' %>
 
   <%= render :partial => 'comments' %>
   
-  <%= @message if @message %>
-  <%= error_messages_for :comment, :header_message => "Whoops there was a small problem",
-                                    :message => "The following problems need to be corrected:" %>
+  <% if @blog.allow_comment %>
+    <%= @message if @message %>
+    <%= error_messages_for :comment, :header_message => "Whoops there was a small problem",
+                                      :message => "The following problems need to be corrected:" %>
                                     
-  <%= render :partial => 'form' %>
+    <%= render :partial => 'form' %>
+  <% end %>
 <% end %>
 
 <% content_for :body_content_right do %>

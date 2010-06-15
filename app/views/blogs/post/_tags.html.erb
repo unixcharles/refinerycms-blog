@@ -1,0 +1,7 @@
+<% if @blog.tag_list.present? and @blog.tag_list.any? %>
+  <div class="categories">
+    <p>Tags:
+      <%= @blog.tag_list.collect{ |tag| link_to tag, blog_tag_url(tag) }.join(', ') %>
+    </p>
+  </div>
+<% end %>

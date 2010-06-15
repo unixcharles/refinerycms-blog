@@ -7,5 +7,6 @@
   <%= blog_post.excerpt %>
 </p>
 <p>
-  <%= link_to 'Read more', blog_post_url(blog_post.permalink) -%> (<%= pluralize blog_post.num_comments, 'comment' %>)
+  <%= link_to 'Read more', blog_post_url(blog_post.permalink) -%> 
+  <%= "(#{pluralize blog_post.approved_comment_count, 'comment'})" if blog_post.allow_comment %>
 </p>

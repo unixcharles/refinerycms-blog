@@ -3,7 +3,6 @@ class BlogsController < ApplicationController
   before_filter :find_blog, :only => [:comment, :show, :authorize]
   before_filter :find_page, :except => [:captcha, :authorize]
   before_filter :load_blogs, :except => [:captcha, :authorize, :tag, :category, :author, :show]
-  before_filter :load_tags, :except => [:captcha, :authorize]
 
   def index
     present(@page)
@@ -90,10 +89,6 @@ class BlogsController < ApplicationController
 protected
   def load_blogs
     @blogs = Blog.published
-
-    if BlogSetting.enable_recent_blogs
-      @recent_blogs = Blog.published(:limit => 5)
-    end
   end
 
   def find_blog
@@ -109,21 +104,7 @@ protected
       if BlogSetting.enable_related_authors
         @related_authors_blogs = @blog.find_related_authors.reject {|blog| !blog.published? && !@blog }
       end
-
-      # in show action, the recent blog exclude the currently displayed blog 
-      if BlogSetting.enable_recent_blogs
-        @recent_blogs = Blog.find(:all,
-                                  :limit => 5,
-                                  :conditions => ["id != ? and publishing_date < ? and draft != ?", @blog.id, Time.now, true],
-                                  :order => "publishing_date DESC")
-      end
     end
-  end
-
-  def load_tags
-    @tags = Blog.published.tag_counts if BlogSetting.enable_tags
-    @categories = Blog.published.category_counts if BlogSetting.enable_categories
-    @authors = Blog.published.author_counts if BlogSetting.enable_authors
   end
 
   def find_page

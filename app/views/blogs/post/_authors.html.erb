@@ -1,0 +1,7 @@
+<% if @blog.author_list.present? and @blog.author_list.any? %>
+  <div class="authors">
+    <p>By
+      <%= @blog.author_list.collect{ |author| link_to author, blog_author_url(author) }.join(', ') %>
+    </p>
+  </div>
+<% end %>

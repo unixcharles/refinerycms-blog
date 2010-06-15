@@ -1,0 +1,10 @@
+<% unless (recent_posts = (@blog || Blog).recent_posts).blank? %>
+  <h2>Recent posts</h2>
+  <ul id="blogs">
+    <% recent_posts.each do |blog| %>
+      <li>
+        <%= link_to blog.title, blog_post_url(blog.permalink) %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

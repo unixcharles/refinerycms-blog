@@ -1,0 +1,10 @@
+<% unless (categories = Blog.categories).blank? %>
+  <h2>Categories</h2>
+  <ul id="categories">
+    <% categories.each do |category| %>
+      <li>
+        <%= link_to category, blog_category_url(category) -%>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

@@ -1,43 +1,4 @@
-<% unless @categories.blank? %>
-  <h2>Categories</h2>
-  <ul id="categories">
-    <% @categories.each do |category| %>
-      <li>
-        <%= link_to category.name, blog_category_url(category.name) -%>
-      </li>
-    <% end %>
-  </ul>
-<% end %>
-
-<% unless @tags.blank? %>
-  <h2>Tags</h2>
-  <ul id="tags">
-    <% @tags.each do |tag| %>
-      <li>
-        <%= link_to tag.name, blog_tag_url(tag.name) -%>
-      </li>
-    <% end %>
-  </ul>
-<% end %>
-
-<% unless @authors.blank? %>
-  <h2>Authors</h2>
-  <ul id="tags">
-    <% @authors.each do |author| %>
-      <li>
-        <%= link_to author.name, blog_author_url(author.name) -%>
-      </li>
-    <% end %>
-  </ul>
-<% end %>
-
-<% unless @recent_blogs.blank? %>
-  <h2>Recent posts</h2>
-  <ul id="blogs">
-    <% @recent_blogs.each do |blog| %>
-      <li>
-        <%= link_to blog.title, blog_post_url(blog.permalink) %>
-      </li>
-    <% end %>
-  </ul>
-<% end %>
+<%= render :partial => '/blogs/side_body/categories' %>
+<%= render :partial => '/blogs/side_body/tags' %>
+<%= render :partial => '/blogs/side_body/authors' %>
+<%= render :partial => '/blogs/side_body/recent_posts' %>

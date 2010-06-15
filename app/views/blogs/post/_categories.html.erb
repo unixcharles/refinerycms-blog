@@ -1,0 +1,7 @@
+<% if @blog.category_list.present? and @blog.category_list.any? %>
+  <div class="categories">
+    <p>Filed under:
+      <%= @blog.category_list.collect{ |category| link_to category, blog_category_url(category) }.join(', ') %>
+    </p>
+  </div>
+<% end %>
