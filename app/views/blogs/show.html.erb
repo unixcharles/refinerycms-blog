@@ -18,9 +18,16 @@
   <%= render :partial => 'comments' %>
   
   <% if @blog.allow_comment %>
-    <%= @message if @message %>
+  
+    <!-- success message -->
+    <% flash.each do |key, value| %>
+      <div id="flash">
+        <%= value %>
+      </div>
+    <% end %>
+    
     <%= error_messages_for :comment, :header_message => "Whoops there was a small problem",
-                                      :message => "The following problems need to be corrected:" %>
+                                     :message => "The following problems need to be corrected:" %>
                                     
     <%= render :partial => 'form' %>
   <% end %>

@@ -46,8 +46,14 @@ class BlogsController < ApplicationController
     if Raptcha.valid?(params) || BlogSetting.enable_captcha == false
       @comment.approved = true unless BlogSetting.manual_moderation
       if @comment.save
-        flash[:notice] = "Comment was posted successfully! Waiting for approval!"
-        @message = @page[:successful_comment]
+        if BlogSetting.manual_moderation
+          flash[:notice] = "Thank you for your comment. It will appear once it has been approved by our moderators."
+        elsif BlogSetting.enable_approve_comment_by_email
+          flash[:notice] = "Thank you for your comment. You have been emailed to approve this comment before it will appear."
+        else
+          flash[:notice] = @page[:successful_comment]
+        end
+        
         if BlogSetting.enable_email_notification
           begin
             BlogMailer.deliver_notification(@comment, request)
@@ -65,7 +71,8 @@ class BlogsController < ApplicationController
         @comment = @blog.comments.new
       end
     else
-      @message = @page[:invalid_comment]
+      @comment.valid?
+      @comment.errors.add_to_base "Captcha is incorrect"
     end
 
     present(@page)
