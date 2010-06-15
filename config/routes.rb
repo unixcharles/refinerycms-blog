@@ -14,7 +14,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.namespace(:admin, :path_prefix => (defined?(REFINERY_GEM_VERSION) ? "admin" : "refinery") ) do |admin|
     admin.resources :blogs, :as => 'blog'
-    admin.resources :comments, :member => {:toggle_status => :get, :unread => :get}
+    admin.resources :comments, :member => {:toggle_status => :get, :unmoderated => :get}
     admin.connect 'blog_settings/toggle_setting/:id', :controller => "blog_settings", :action => "toggle_setting"
     admin.resources :blog_settings
   end

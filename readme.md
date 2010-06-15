@@ -23,7 +23,7 @@ Blog comments with
 Administration panel
 
 * write blogs
-* manage comments (unread/approved/refused)
+* manage comments (unmoderated/approved/refused)
 * Change settings
 
 ## Dependencies

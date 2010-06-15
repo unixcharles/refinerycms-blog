@@ -7,7 +7,7 @@
       <%= link_to "Create new post", new_admin_blog_url, :class => "add_icon" %>
     </li>
     <li>
-      <%= link_to "Moderate comments (#{Comment.unread.count} unread)", admin_comments_url, :class => "user_comment_icon" %>
+      <%= link_to "Moderate comments (#{Comment.unmoderated.count} unmoderated)", admin_comments_url, :class => "user_comment_icon" %>
     </li>
     <li>
       <%= link_to "Edit settings", admin_blog_settings_url, :class => "edit_icon" %>

@@ -6,8 +6,8 @@
                   :title => "Mark this comment as #{comment.is_approved? ? 'refused' : 'approved'}" %>
 
       <%= link_to refinery_icon_tag("arrow_up.png"),
-                  unread_admin_comment_url(comment),
-                  :title => "Send back to unread comments" if BlogSetting.manual_moderation %>
+                  unmoderated_admin_comment_url(comment),
+                  :title => "Send back to unmoderated comments" if BlogSetting.manual_moderation %>
 
       <%= link_to refinery_icon_tag('delete.png'),
                   admin_comment_url(comment),

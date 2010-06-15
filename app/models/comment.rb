@@ -1,7 +1,7 @@
 class Comment < ActiveRecord::Base
   belongs_to :blog
   
-  named_scope :unread, :conditions => {:approved => nil}
+  named_scope :unmoderated, :conditions => { :approved => nil }
   named_scope :history, :conditions => 'approved IS NOT NULL', :order => "created_at DESC"
   
   named_scope :approved, :conditions => {:approved => true}
