@@ -18,7 +18,7 @@ class CreateBlogs < ActiveRecord::Migration
     add_index :blogs, :permalink
 
     User.find(:all).each do |user|
-      user.plugins.create(:title => "Blog", :position => (user.plugins.maximum(:position) || -1) +1)
+      user.plugins.create(:name => "Blog", :position => (user.plugins.maximum(:position) || -1) +1)
     end
 
     create_table :comments do |t|
